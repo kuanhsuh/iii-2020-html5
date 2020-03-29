@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=asdf, initial-scale=1.0" />
+    <title>Web Socket</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="mario-chat">
+      <div id="chat-window">
+        <div id="output"></div>
+        <div id="feedback"></div>
+      </div>
+      <input type="text" id="handle" placeholder="Handle" />
+      <input type="text" id="message" placeholder="Message" />
+
+      <button id="send">Send</button>
+    </div>
+
+    <script>
+      // Make Connection
+      var socket = io.connect("http://localhost:4000");
+
+      // Query DOM
+      var message = document.getElementById("message");
+      var handle = document.getElementById("handle");
+      var btn = document.getElementById("send");
+      var output = document.getElementById("output");
+      var feedback = document.getElementById("feedback");
+
+      // Emit Event
+      btn.addEventListener("click", function() {
+        socket.emit("chat", {
+          message: message.value,
+          handle: handle.value
+        });
+      });
+
+      message.addEventListener("keypress", function() {
+        socket.emit("typing", handle.value);
+      });
+
+      // Listen for events
+      socket.on("chat", function(data) {
+        feedback.innerHTML = "";
+        output.innerHTML += `<p><strong>${data.handle}:</strong> ${data.message}</p>`;
+      });
+
+      socket.on("typing", function(data) {
+        feedback.innerHTML = `<p><em>${data} is typing...</em></p>`;
+      });
+    </script>
+  </body>
+</html>

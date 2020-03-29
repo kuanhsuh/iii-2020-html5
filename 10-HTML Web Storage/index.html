@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    localStorage.setItem('breakfast', 'cereal');
+    console.log(localStorage.getItem('breakfast', 'cereal'));
+    // localStorage.removeItem('breakfast')
+    // localStorage.clear();
+
+
+    sessionStorage.setItem('lunch', 'noodle');
+    console.log(sessionStorage.getItem('lunch', 'noodle'));
+    // sessionStorage.removeItem('breakfast')
+
+
+    document.cookie = "hello=true";
+    document.cookie = "person=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log(document.cookie)
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

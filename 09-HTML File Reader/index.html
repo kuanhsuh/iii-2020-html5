@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" name="" id="">
+  <script>
+    const input = document.querySelector('input[type="file"]')
+
+    input.addEventListener('change', function (e) {
+      console.log(input.files)
+      const reader = new FileReader()
+      reader.onload = function () {
+        // console.log(reader.result)
+        const lines = reader.result.split('\n').map(function (line) {
+          return line.split(',')
+        })
+        console.log(lines)
+      }
+      reader.readAsText(input.files[0])
+    }, false)
+
+  </script>
+</body>
+
+</html>
