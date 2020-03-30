@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Audio</title>
+
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
 
@@ -33,23 +34,20 @@
     }
 
   </style>
-
 </head>
 
 <body>
-  <audio controls>
-    <source src="audio.mp3" type="audio/mpeg">
-  </audio>
-  <div class="ready-player-2">
-    <audio crossorigin>
+  <div class="ready-player-1">
+    <audio>
       <source src="audio.mp3" type="audio/mpeg">
     </audio>
   </div>
 
   <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      new GreenAudioPlayer('.ready-player-2', {
+      new GreenAudioPlayer('.ready-player-1', {
         stopOthersOnPlay: true
       });
     });

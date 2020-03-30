@@ -5,27 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
   <script>
-    localStorage.setItem('breakfast', 'cereal');
-    console.log(localStorage.getItem('breakfast', 'cereal'));
+    // localStorage.setItem('breakfast', 'milk')
+    // localStorage.setItem('lunch', 'hot dog')
     // localStorage.removeItem('breakfast')
+    // console.log(localStorage.getItem('breakfast'))
+    // console.log(localStorage.getItem('lunch'))
     // localStorage.clear();
 
-
-    sessionStorage.setItem('lunch', 'noodle');
-    console.log(sessionStorage.getItem('lunch', 'noodle'));
+    // sessionStorage.setItem('breakfast', 'milk')
+    // sessionStorage.setItem('lunch', 'hot dog')
+    // console.log(sessionStorage.getItem('breakfast'))
+    // console.log(sessionStorage.getItem('lunch'))
     // sessionStorage.removeItem('breakfast')
+    // sessionStorage.clear();
 
-
-    document.cookie = "hello=true";
-    document.cookie = "person=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    console.log(document.cookie)
+    document.cookie = "breakfast=milk"
+    document.cookie = "lunch=hot dog"
+    document.cookie = "breakfast=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/;";
+    document.cookie = "lunch=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/;";
 
   </script>
 </head>
 
 <body>
-
+  <h1>Web Storage Tutorial</h1>
 </body>
 
 </html>

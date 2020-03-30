@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio</title>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/css/green-audio-player.min.css">
+
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #F8FFAE;
+      background: -webkit-linear-gradient(-65deg, #43C6AC, #F8FFAE);
+      background: linear-gradient(-65deg, #43C6AC, #F8FFAE);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .ready-player-1,
+    .ready-player-2 {
+      margin: 24px 0;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <audio controls>
+    <source src="audio.mp3" type="audio/mpeg">
+  </audio>
+  <!-- <div class="ready-player-2">
+    <audio crossorigin>
+      <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      new GreenAudioPlayer('.ready-player-2', {
+        stopOthersOnPlay: true
+      });
+    });
+
+  </script> -->
+</body>
+
+</html>

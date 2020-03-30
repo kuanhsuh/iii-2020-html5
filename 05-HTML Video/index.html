@@ -84,7 +84,7 @@
 
     .orange-juice {
       height: 10px;
-      /* width: 100px;  */
+      /* width: 100px; */
       background-color: orangered;
     }
 
@@ -108,35 +108,36 @@
 
 
   <script>
-    // Step 1
+    // Stap 1 DOM 宣告 Declation
     var video = document.querySelector('video')
     var juice = document.querySelector('.orange-juice')
-    var btn = document.querySelector('#play-pause')
+    var button = document.querySelector('#play-pause')
 
-    // Step 2
+    // Step Toggle Play/Pause
     function togglePlaypause() {
       if (video.paused) {
-        btn.className = "pause"
+        button.className = "pause"
         video.play()
       } else {
-        btn.className = "play"
+        button.className = "play"
         video.pause()
       }
     }
 
-    // Step 3
+    // Step 4 Video status bar
     video.addEventListener('timeupdate', function () {
       var juicePos = video.currentTime / video.duration
-      juice.style.width = juicePos * 100 + "%"
+      juice.style.width = juicePos * 100 + "%" // 0.0523 * 100 = "5.25%"
       if (video.ended) {
         btn.className = "play"
       }
     })
 
-    // Step 4
-    btn.onclick = function () {
-      togglePlaypause();
-    }
+
+    // Step 2
+    button.addEventListener('click', function () {
+      togglePlaypause()
+    })
 
   </script>
 </body>

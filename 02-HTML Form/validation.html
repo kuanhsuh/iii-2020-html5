@@ -10,15 +10,16 @@
 </head>
 
 <body class="p-20">
-  <div class="w-full max-w-xs">
-    <!-- <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <!-- <div class="w-full max-w-xs">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-          Text
+          Telephone
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="username" type="text" placeholder="Username" required>
+          id="username" type="tel" pattern="^[0-9-+\s()]*$" placeholder="Telophone" required>
+
       </div>
       <div class="mb-6">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -35,16 +36,17 @@
         </button>
       </div>
     </form>
-  </div> -->
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <input type="text" pattern=".{3,}" placeholder="min 3"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-      <input type="text" placeholder="min 4" pattern=".{4,}" oninvalid="setCustomValidity('Must be 4 Characters')"
-        oninput="setCustomValidity('')"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-      <input type="submit" value="Check" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
-    </form>
-    <!-- https://stackoverflow.com/questions/51675169/html5-input-validation-with-custom-message -->
+  </!-->
+  <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <input type="text" pattern=".{3,}" placeholder="min 3"
+      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    <input type="text" placeholder="min 4" pattern=".{4,}" oninvalid="setCustomValidity('Must be 4 Characters')"
+      oninput="setCustomValidity('')"
+      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    <input type="submit" value="Check"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
+  </form>
+  <!-- https://stackoverflow.com/questions/51675169/html5-input-validation-with-custom-message -->
 </body>
 
 </html>
