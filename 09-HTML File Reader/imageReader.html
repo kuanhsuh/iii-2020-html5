@@ -18,19 +18,28 @@
     const input = document.querySelector('input[type="file"]')
 
     input.addEventListener('change', function (e) {
-      console.log(input.files)
+
       const reader = new FileReader()
       reader.onload = function () {
+        // console.log(reader.result)
+
+        // Image Preview
         const img = new Image();
+        img.src = reader.result
+        // document.body.append(img)
+
+        // Change Image to Black and White
         img.onload = function () {
+          const imgWidth = this.width;
+          const imgHeight = this.height;
+
           const canvas = document.createElement('canvas')
+          canvas.width = imgWidth
+          canvas.height = imgHeight
           const context = canvas.getContext('2d')
           context.drawImage(img, 0, 0)
-
           const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-
           const data = imageData.data
-          console.log('data', data)
 
           for (var i = 0; i <= data.length; i += 4) {
             const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
@@ -38,21 +47,26 @@
             data[i + 1] = avg
             data[i + 2] = avg
           }
-
           context.putImageData(imageData, 0, 0)
+          // document.body.append(canvas)
 
+          // Step 5 BLOB Create Files from base64
           canvas.toBlob(function (blob) {
-            const form = new FormData();
-            form.append('image', blob, 'moody.jpg')
+            var newImg = document.createElement('img')
+            url = URL.createObjectURL(blob)
+            newImg.src = url
+            document.body.append(newImg)
           })
-          document.body.appendChild(canvas)
+
 
         }
-        img.src = reader.result
-        // document.body.appendChild(img)
+
       }
+      // Base 64 Encode File
+      // String Representation of Image
       reader.readAsDataURL(input.files[0])
-    }, false)
+
+    })
 
   </script>
 </body>

@@ -1,0 +1,32 @@
+<html lang="zh-TW">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+
+
+<script>
+  function init() {
+    var es = new EventSource('sse.php');
+    es.addEventListener('message', function (e) {
+      var newElement = document.createElement("li");
+
+      newElement.innerHTML = "message: " + e.data;
+      console.log(newElement)
+      document.getElementById('msg').append(newElement);
+    }, false)
+  }
+</script>
+
+
+<div>
+  <div class="container mx-auto rounded bg-gray-200 shadow p-10 max-w-4xl">
+    <h3 class="font-medium text-2xl mb-2">Server Side Events Demo</h3>
+    <div id="msg"></div>
+  </div>
+</div>
+
+
+<script>
+  init();
+</script>

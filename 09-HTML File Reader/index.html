@@ -19,18 +19,17 @@
     </textarea>
   </section>
   <script>
-    // Text Reader or Text Preview
+    // Stel DOM Declaration
     const input = document.querySelector('input[type="file"]')
     const textContainer = document.querySelector('#text-container')
 
     input.addEventListener('change', function (e) {
-      console.log(input.files)
-      // const reader = new FileReader()
-      // reader.onload = function () {
-      //   console.log(reader.result)
-      //   textContainer.value = reader.result
-      // }
-      // reader.readAsText(input.files[0])
+      const reader = new FileReader();
+      reader.readAsText(input.files[0])
+      reader.onload = function () {
+        textContainer.value = reader.result
+      }
+
       // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
     })
 
