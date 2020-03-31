@@ -5,10 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body>
-  <input type="file" name="" id="">
+  <section class="container mx-auto bg-pink-100 max-w-4xl rounded mt-10 p-10 shadow">
+    <h3 class="text-3xl font-medium mb-4">Image Previewer</h3>
+    <input type="file" name="" id="">
+
+  </section>
   <script>
     const input = document.querySelector('input[type="file"]')
 
@@ -25,6 +30,7 @@
           const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
 
           const data = imageData.data
+          console.log('data', data)
 
           for (var i = 0; i <= data.length; i += 4) {
             const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
@@ -34,10 +40,6 @@
           }
 
           context.putImageData(imageData, 0, 0)
-          // toDataURL base64 set to our image tag
-          // canvas.toDataURL()
-          // Binary Large Object
-          // const csvfile = Blob(['one', 'two', 'three'], { type: 'text/csv'})
 
           canvas.toBlob(function (blob) {
             const form = new FormData();

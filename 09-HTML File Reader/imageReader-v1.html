@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <section class="container mx-auto bg-pink-100 max-w-4xl rounded mt-10 p-10 shadow">
+    <h3 class="text-3xl font-medium mb-4">Image Previewer</h3>
+    <input type="file" name="" id="">
+
+  </section>
+  <script>
+    const input = document.querySelector('input[type="file"]')
+
+    input.addEventListener('change', function (e) {
+      console.log(input.files)
+      // Step 1
+      const reader = new FileReader()
+      reader.onload = function () {
+        console.log(reader.result)
+
+        // Step 2 Image Preview
+        const img = new Image();
+        img.src = reader.result
+        // document.body.append(img)
+
+        // Step 3 Change Image to Black and White
+        img.onload = function () {
+          const imgWidth = this.width;
+          const imgHeight = this.height;
+          const canvas = document.createElement('canvas')
+          canvas.width = imgWidth;
+          canvas.height = imgHeight;
+          const context = canvas.getContext('2d')
+          context.drawImage(img, 0, 0)
+          // Image in Canas
+          // https://www.w3schools.com/tags/canvas_getimagedata.asp
+          // All RGBA values
+          const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+          const data = imageData.data
+          // console.log(imageData);
+
+          // Step 4
+          for (var i = 0; i <= data.length; i += 4) {
+            const avg = (data[i] + data[i + 1] + data[i + 2]) / 3
+            data[i] = avg
+            data[i + 1] = avg
+            data[i + 2] = avg
+          }
+          context.putImageData(imageData, 0, 0)
+          document.body.append(canvas)
+
+          // Step 5 BLOB Create Files from base64
+          canvas.toBlob(function (blob) {
+            console.log(blob)
+            var newImg = document.createElement("img"),
+              url = URL.createObjectURL(blob);
+            newImg.src = url;
+            document.body.appendChild(newImg);
+
+          }, 'testing.jpg')
+        }
+
+
+      }
+      // Base 64 Encode File
+      // String Representation of Image
+      reader.readAsDataURL(input.files[0])
+    }, false)
+
+  </script>
+</body>
+
+</html>

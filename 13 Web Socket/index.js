@@ -1,7 +1,7 @@
 var express = require("express");
 var socket = require("socket.io");
 
-// App Setup
+// Step 1App Setup
 var app = express();
 var server = app.listen(4000, function() {
   console.log("listening to request on prt 4000");
