@@ -1,70 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Data Fetch</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open Data Fetch</title>
-  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <body class="serif text-gray-700 py-20">
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-medium mb-4">台北YouBike Fetch練習</h1>
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th class="px-4 py-2">站點代號</th>
+            <th class="px-4 py-2">場站名稱</th>
+            <th class="px-4 py-2">場站總停車格</th>
+            <th class="px-4 py-2">場站目前車輛數量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr class="bg-gray-100">
+            <td class="border px-4 py-2">
+              A Long and Winding Tour of the History of UI Frameworks and Tools
+              and the Impact on Design
+            </td>
+            <td class="border px-4 py-2">Adam</td>
+            <td class="border px-4 py-2">112</td>
+            <td class="border px-4 py-2">112</td>
+          </tr>
+          <tr>
+            <td class="border px-4 py-2">Intro to JavaScript</td>
+            <td class="border px-4 py-2">Chris</td>
+            <td class="border px-4 py-2">1,280</td>
+            <td class="border px-4 py-2">1,280</td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      const url =
+        "https://tcgbusfs.blob.core.windows.net/blobyoubike/dYouBikeTP.json";
+      const tableBody = document.querySelector("tbody");
 
-</head>
-
-<body class="serif text-gray-700 py-20">
-  <div class="container mx-auto">
-    <h1 class="text-3xl font-medium mb-4">台北YouBike Fetch練習</h1>
-    <table class="table-auto">
-      <thead>
-        <tr>
-          <th class="px-4 py-2">站點代號</th>
-          <th class="px-4 py-2">場站名稱</th>
-          <th class="px-4 py-2">場站總停車格</th>
-          <th class="px-4 py-2">場站目前車輛數量</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <tr class="bg-gray-100">
-          <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact
-            on Design</td>
-          <td class="border px-4 py-2">Adam</td>
-          <td class="border px-4 py-2">112</td>
-          <td class="border px-4 py-2">112</td>
-        </tr>
-        <tr>
-          <td class="border px-4 py-2">Intro to JavaScript</td>
-          <td class="border px-4 py-2">Chris</td>
-          <td class="border px-4 py-2">1,280</td>
-          <td class="border px-4 py-2">1,280</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <script>
-    console.log('hello fetch')
-    const url = "https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json"
-    const tableBody = document.querySelector("tbody")
-
-    fetch(url)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (myJson) {
-        const data = Object.values(myJson.retVal)
-        const newData = data.map(bikeData => {
-          return `
+      // fetch(url)
+      //   .then(function(response) {
+      //     return response.json();
+      //   })
+      //   .then(function(data) {
+      //     const newData = Object.values(data.retVal);
+      //     const htmlData = newData.map(bikeData => {
+      //       return `
+      //       <tr>
+      //         <td class="border px-4 py-2">${bikeData.sno}</td>
+      //         <td class="border px-4 py-2">${bikeData.sna}</td>
+      //         <td class="border px-4 py-2">${bikeData.tot}</td>
+      //         <td class="border px-4 py-2">${bikeData.sbi}</td>
+      //       </tr>
+      //       `;
+      //     });
+      //     tableBody.innerHTML = htmlData.join(" ");
+      //   });
+      axios
+        .get(url)
+        .then(function(response) {
+          // handle success
+          const newData = Object.values(response.data.retVal);
+          const htmlData = newData.map(bikeData => {
+            return `
             <tr>
               <td class="border px-4 py-2">${bikeData.sno}</td>
               <td class="border px-4 py-2">${bikeData.sna}</td>
               <td class="border px-4 py-2">${bikeData.tot}</td>
               <td class="border px-4 py-2">${bikeData.sbi}</td>
             </tr>
-            `
+            `;
+          });
+          tableBody.innerHTML = htmlData.join(" ");
         })
-        tableBody.innerHTML = newData.join(" ")
-      });
-
-  </script>
-</body>
-
+        .catch(function(error) {
+          // handle error
+          console.error(error);
+        });
+    </script>
+  </body>
 </html>
