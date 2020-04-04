@@ -21,10 +21,11 @@ webpush.setVapidDetails(
   privateVapidKey
 );
 
+// subscribe route
 app.post("/subscribe", (req, res) => {
   // get push sub obj
   const subscription = req.body;
-
+  console.log(subscription);
   // send 201 status
   res.status(201).json({});
 
@@ -34,7 +35,7 @@ app.post("/subscribe", (req, res) => {
   // pass object into web push
   webpush
     .sendNotification(subscription, payload)
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 });
 
 const port = 5000;

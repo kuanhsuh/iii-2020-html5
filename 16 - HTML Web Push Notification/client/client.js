@@ -3,7 +3,7 @@ const publicVapidKey =
 
 // Check Service Worker
 if ("serviceWorker" in navigator) {
-  send().catch(err => console.error(err));
+  send().catch((err) => console.error(err));
 }
 
 // Register SW, Register Push, Send Push
@@ -11,14 +11,14 @@ async function send() {
   // Register Service Worker
   console.log("register service worker...");
   const register = await navigator.serviceWorker.register("/sw.js", {
-    scope: "/"
+    scope: "/",
   });
   console.log("service worker register...");
   // Register Push
   console.log("Register Push...");
   const subscription = await register.pushManager.subscribe({
     userVisibleOnly: true,
-    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
   });
   console.log("push Registered...");
 
@@ -28,8 +28,8 @@ async function send() {
     method: "POST",
     body: JSON.stringify(subscription),
     headers: {
-      "content-type": "application/json"
-    }
+      "content-type": "application/json",
+    },
   });
   console.log("Push Sent");
 }
@@ -47,10 +47,7 @@ function urlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-const vapidPublicKey = "<Your Public Key from generateVAPIDKeys()>";
-const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey);
-
 registration.pushManager.subscribe({
   userVisibleOnly: true,
-  applicationServerKey: convertedVapidKey
+  applicationServerKey: convertedVapidKey,
 });
