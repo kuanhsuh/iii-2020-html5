@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <section class="container mx-auto py-20">
+    <div>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="city" type="text" placeholder="city">
+    </div>
+    <ul id="resultUl" class="shadow">
+      <!-- <li class="p-2 border-b border-gray-200">New York City</li>
+      <li class="p-2 border-b border-gray-200">New York City</li>
+      <li class="p-2 border-b border-gray-200">New York City</li>
+      <li class="p-2 border-b border-gray-200">New York City</li>
+      <li class="p-2 border-b border-gray-200">New York City</li> -->
+    </ul>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+
+
+  <script>
+    const searchInput = document.querySelector('#city')
+    const resultUl = document.querySelector("#resultUl")
+    let timeout = null;
+    let result;
+
+    let cities;
+    fetch('./city.json')
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (myJson) {
+        cities = _.flatten(Object.values(myJson))
+      });
+
+    searchInput.addEventListener('keyup', () => {
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        result = cities.filter(city => city.includes(searchInput.value))
+        displayCities(result)
+      }, 1000);
+    })
+
+    function displayCities(result) {
+      var elements = result.map(city => {
+        return `
+        <li class="p-2 border-b border-gray-200">${city}</li>
+        `
+      })
+
+      resultUl.innerHTML = elements.join(" ")
+    }
+
+  </script>
+</body>
+
+</html>
