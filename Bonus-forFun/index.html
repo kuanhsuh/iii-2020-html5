@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var model = {
+      todos: ['todo1', 'todo2', 'todo3'],
+
+      displayTodo: function () {
+        console.log(this.todos)
+      },
+      addTodo: function (todoText) {
+        debugger;
+        this.todos.push(todoText)
+        this.displayTodo()
+      },
+      updateTodo: function (index, todoText) {
+        this.todos[index] = todoText
+        this.displayTodo()
+      },
+      deleteTodo: function (index) {
+        this.todos.splice(index, 1)
+        this.displayTodo()
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

@@ -28,13 +28,16 @@
 
 
   <script>
-    const searchInput = document.querySelector('#city')
+    const searchInput = document.querySelector("#city")
     const resultUl = document.querySelector("#resultUl")
-    let timeout = null;
-    let result;
-
     let cities;
-    fetch('./city.json')
+    let result;
+    let timeout = null;
+
+
+    fetch(
+        './city.json'
+      )
       .then(function (response) {
         return response.json();
       })
@@ -45,7 +48,8 @@
     searchInput.addEventListener('keyup', () => {
       clearTimeout(timeout);
 
-      timeout = setTimeout(() => {
+      // Make a new timeout set to go off in 1000ms (1 second)
+      timeout = setTimeout(function () {
         result = cities.filter(city => city.includes(searchInput.value))
         displayCities(result)
       }, 1000);
@@ -57,7 +61,6 @@
         <li class="p-2 border-b border-gray-200">${city}</li>
         `
       })
-
       resultUl.innerHTML = elements.join(" ")
     }
 
