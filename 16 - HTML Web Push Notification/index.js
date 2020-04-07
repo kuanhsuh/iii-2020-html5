@@ -5,34 +5,35 @@ const path = require("path");
 
 const app = express();
 
-//Set Static Path
+// Set Static Path
 app.use(express.static(path.join(__dirname, "client")));
 
 app.use(bodyParser.json());
 
 const publicVapidKey =
-  "BJYBGcOMWV015hgejQ40PJX8hRE1flyWx21Kwl7RaErLCU7RpjbQfCmKNzN8ayDxJ_xk-Ih9fs_HcpRvJ5RQCwQ";
+  "BPISvkpNgaUW4xJ178jAc3XDFUbtXx1ULS55h7ugX1-ZSWtmzvaNziiDMD5KACMtYfooG-3k71q_Ps0tY16jPOs";
 
-const privateVapidKey = "qd1A04Wy69If8hWJ4TIkmAACldoal42ICUKimk-Spqc";
+const privateVapidKey = "UeTxYJQv9iza9CSBhdMz70zTsfq9koqFdIAP02fPavI";
 
 webpush.setVapidDetails(
-  "mailto:test@test.com",
+  "mailto:example@yourdomain.org",
   publicVapidKey,
   privateVapidKey
 );
 
-// subscribe route
 app.post("/subscribe", (req, res) => {
-  // get push sub obj
+  //get push sub object
   const subscription = req.body;
   console.log(subscription);
-  // send 201 status
+  //send 201 status
   res.status(201).json({});
 
-  // create payload
-  const payload = JSON.stringify({ title: "Push Test" });
+  const payload = JSON.stringify({
+    title: "Push Test",
+  });
 
   // pass object into web push
+
   webpush
     .sendNotification(subscription, payload)
     .catch((err) => console.error(err));
